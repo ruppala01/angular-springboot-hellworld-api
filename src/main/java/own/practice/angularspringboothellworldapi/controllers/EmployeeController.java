@@ -4,20 +4,43 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import own.practice.angularspringboothellworldapi.model.Employee;
 
 @RestController
 @CrossOrigin(origins="http://localhost:4200")
+@RequestMapping(value = "/employees")
 public class EmployeeController {
 	private List<Employee> employees = createList();
 
-	@RequestMapping(value = "/employees", method = RequestMethod.GET, produces = "application/json")
+	@GetMapping( produces = "application/json")
 	public List<Employee> firstPage() {
 		return employees;
+	}
+	
+	@DeleteMapping(value="{id}")
+	public List<Employee> deleteEmployee(@PathVariable int id) {
+		Employee deletedEmp=null;
+		for (Employee emp:employees) {
+			if((Integer.parseInt(emp.getEmpId())==id)) {
+				employees.remove(emp);
+				deletedEmp=emp;
+				break;
+			}
+		}
+		return employees;
+	}
+	@PostMapping
+	public Employee addEmployee(@RequestBody Employee emp) {
+		employees.add(emp);
+		return emp;
 	}
 	
 	private static List<Employee> createList() {

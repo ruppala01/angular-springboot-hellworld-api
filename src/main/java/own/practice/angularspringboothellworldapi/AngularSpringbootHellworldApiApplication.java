@@ -9,5 +9,4 @@ public class AngularSpringbootHellworldApiApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(AngularSpringbootHellworldApiApplication.class, args);
 	}
-
 }
