@@ -7,6 +7,7 @@
 Spring-Boot-API-Branch-Name | UI-branch-name
 ----------------------------|---------------
 1-crud | 1-crud-ui
+1.1-basicauth-api| 1.1.1-basicauth-ui
 
 
 
