@@ -13,13 +13,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import own.practice.angularspringboothellworldapi.model.Employee;
+import own.practice.angularspringboothellworldapi.model.User;
 
 @RestController
-@CrossOrigin(origins="http://localhost:4200")
+@CrossOrigin()
 @RequestMapping(value = "/employees")
 public class EmployeeController {
 	private List<Employee> employees = createList();
-
+	
+	@GetMapping(produces="application/json")
+	@RequestMapping("/validateLogin")
+	public User validateLong() {
+		return new User("User validated succesfully");
+		
+	}
+	
 	@GetMapping( produces = "application/json")
 	public List<Employee> firstPage() {
 		return employees;
@@ -29,7 +37,7 @@ public class EmployeeController {
 	public List<Employee> deleteEmployee(@PathVariable int id) {
 		Employee deletedEmp=null;
 		for (Employee emp:employees) {
-			if((Integer.parseInt(emp.getEmpId())==id)) {
+			if((Integer.parseInt(emp.getEmpId())==id)){
 				employees.remove(emp);
 				deletedEmp=emp;
 				break;
